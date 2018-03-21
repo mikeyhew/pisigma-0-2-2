@@ -3,7 +3,7 @@
 
 module Check where
 
-import Prelude hiding ( length )
+import Prelude hiding ( length, (<$>) )
 import Control.Arrow  ( first )
 import Control.Monad
 import Control.Monad.Error

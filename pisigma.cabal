@@ -1,0 +1,82 @@
+cabal-version: >= 1.8
+name:          pisigma
+version:       0.2.2.0
+license:       BSD3
+license-file:  LICENSE
+data-files:    examples/*.pi
+author:        Thorsten Altenkirch <txa@cs.nott.ac.uk>,
+               Andres Loeh <kspisigma@andres-loeh.de>,
+               Nils Anders Danielsson <nad@cs.nott.ac.uk>,
+               Nicolas Oury <Nicolas.Oury@ed.ac.uk>,
+               Darin Morrison <dwm@cs.nott.ac.uk>
+maintainer:    Thorsten Altenkirch <txa@cs.nott.ac.uk>,
+               Andres Loeh <kspisigma@andres-loeh.de>
+synopsis:      A dependently typed core language
+description:   
+  PiSigma is a small dependently typed language with only very few
+  constructs: Type:Type, Pi-types, Sigma-types, enumerations and a
+  general meachanism for mutual recursion for types and values
+  controlled by lifted types. It is intended as a core language for
+  dependently typed languages like Agda. It has been described in the
+  paper /PiSigma: Dependent Types Without the Sugar/ which has
+  appeared in the proceedings of FLOPS 2010.
+category:      Development, Language, Dependent Types
+build-type:    Simple
+
+flag debug
+  description:      Enable debug support
+  default:          False
+
+library
+  build-depends:    array          
+                  , base           
+                  , haskeline
+                  , haskeline-class
+                  , mtl            
+                  , parsec         
+                  , text           
+                  , containers     
+                  , ansi-wl-pprint
+                  , utf8-string < 1.0
+
+  exposed-modules:  Check
+                  , Constraints
+                  , Environment
+                  , Equal
+                  , Error
+                  , Eval
+                  , Evaluate
+                  , Lexer
+                  , Location
+                  , Normalise
+                  , PSIO
+                  , Parser
+                  , Pretty
+                  , REPL
+                  , Smart
+                  , Symbols
+                  , Syntax
+                  , Values
+                  , Version
+
+  if flag(debug)
+    ghc-options:    -Wall --enable-library-profiling -auto -funbox-strict-fields
+  else
+    ghc-options:    -funbox-strict-fields
+
+  hs-source-dirs:   src
+
+executable pisigma-exe
+
+  if flag(debug)
+    ghc-options:    -Wall --enable-library-profiling -auto -funbox-strict-fields
+  else
+    ghc-options:    -funbox-strict-fields
+
+  hs-source-dirs:   app
+
+  main-is:          Main.hs
+
+  build-depends:    base
+                  , pisigma
+                  , utf8-string < 1.0

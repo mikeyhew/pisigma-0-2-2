@@ -49,6 +49,7 @@ start =
     dashline = take defaultPageWidth $ repeat '-'
     
 -- Displays strings of letters and symbols to check whether characters are displayed properly:
+{--
 displayTestStrings = 
    do
    catch (renderIO $ text $ (concatMap (\s -> "Characters test: " ++ s ++ "\n") strings))
@@ -59,6 +60,7 @@ displayTestStrings =
    strings       = splitsAt (defaultPageWidth - 20) $ "abc...xyz01234567890=" ++ symbolsList 
    splitsAt i [] = []
    splitsAt i xs = let (z,ys) = splitAt i xs in z : splitsAt i ys
+--}
 
 -- In GHCi, enter   ps foo.pi   to launch the PiSigma interpreter with file foo.pi 
 ps :: String -> IO ()

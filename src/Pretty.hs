@@ -18,6 +18,7 @@ module Pretty
     , prettyProg)
   where
 
+import Prelude hiding ((<$>))
 import Text.PrettyPrint.ANSI.Leijen
   hiding (Pretty)
 import System.IO (stdout)

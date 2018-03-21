@@ -1,0 +1,17 @@
+Ba : Type;
+Ba = { o };
+
+A : Type;
+A = { a };
+
+B : A -> Type;
+B = \ y -> case y of
+                { a -> Ba};
+
+t : (x : A) -> B x;
+t = \ z -> case z of { a -> 'o };
+
+-- Now evaluate t 'a in pisigma, you get:
+-- 'o : B x
+-- but x should be expanded to 'a
+

@@ -22,7 +22,8 @@ newtype Eval a = Eval { unEval :: ReaderT Constraints (StateT Environment (Error
            , MonadError EvalError
            , MonadState Environment
            , MonadReader Constraints
-           , Functor)
+           , Functor
+           , Applicative)
 
 type EvalError   = String   -- Evaluation error message
 

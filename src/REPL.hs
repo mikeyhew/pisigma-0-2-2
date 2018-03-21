@@ -5,12 +5,15 @@
 
 module REPL where
 
-import Prelude hiding (catch,readFile, putStrLn)
+import Prelude hiding (catch,readFile, putStrLn, (<$>))
 import qualified Data.List as List
 import Data.Char
+
+import System.Console.Haskeline.MonadException
 import System.Console.Haskeline.Class
-import Control.Monad.Error
-import Control.Monad.State
+
+import Control.Monad.Error hiding (MonadException)
+import Control.Monad.State.Strict
 import Control.Monad.Trans
 import GHC.Read
 import Text.PrettyPrint.ANSI.Leijen
@@ -38,11 +41,6 @@ import Symbols
 
 -- * Instances needed for newtype deriving
 
-instance (Error e, MonadException m) => MonadException (ErrorT e m) where
-  catch m = ErrorT . catch (runErrorT m) . (runErrorT .)
-  block   = mapErrorT block
-  unblock = mapErrorT unblock
-
 instance (Error e, MonadHaskeline m) => MonadHaskeline (ErrorT e m) where
   getInputLine = lift . getInputLine
   getInputChar = lift . getInputChar
@@ -59,7 +57,9 @@ newtype REPL a = REPL { unREPL :: ErrorT REPLError (HaskelineT (StateT REPLState
            , MonadError REPLError
            , MonadHaskeline
            , MonadIO
-           , MonadState REPLState )
+           , MonadState REPLState
+           , Functor
+           , Applicative)
 
 -- | The state currently keeps track of identifiers defined and their
 -- types, as well as a list of files currently loaded.

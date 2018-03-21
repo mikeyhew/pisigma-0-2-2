@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Error where
 
+import Prelude hiding ((<$>))
 import Control.Monad.Error
 
 import Location
