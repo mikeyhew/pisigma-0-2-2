@@ -10,7 +10,7 @@
 * Simple syntax highlighting of expressions in PiSigma interactive session is restored. It works well within OS X terminals and in WinGHCi. 
   It is ugly in Windows consoles.
 
-* Other minor changes have been made to the pretty printer to enhance the layout (e.g. smart printing \ x y x -> ... instead of \ x -> \ y -> \ z -> ...).
+* Other minor changes have been made to the pretty printer to enhance the layout (e.g. smart printing \ x y z -> ... instead of \ x -> \ y -> \ z -> ...).
 
 
 * WINDOWS CONSOLE and UTF8
@@ -23,10 +23,10 @@
   it converts characters in identifier names which have a code higher than 127 to some string and underlines the names that have been modified.
   The conversion is inspired by Agda shortcuts used to write symbols in Emacs.
   
-** Release notes for developpers (PiSigma Version 0.2.2)
+** Release notes for developers (PiSigma Version 0.2.2)
    -----------------------------------------------------
 
-* Modules have been reorgnized so as to avoid circularity and bootstrapping.
+* Modules have been reorganized so as to avoid circularity and bootstrapping.
 
 * Module Internal.hs which relied Data.ByteString to support UTF8 strings has been dropped and strings are now all native GHC ones 
   (GHC fully supports strings encoded in UTF8).
@@ -48,6 +48,6 @@
   cabal install --global haskeline
   cabal install --global haskeline-class
   
-* Many variables and functions in the Haskell source code have been renamed so as to better introduce the code to new developpers (whom we crucially need).
+* Many variables and functions in the Haskell source code have been renamed so as to better introduce the code to new developers (whom we crucially need).
 
   
